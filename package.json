@@ -1,0 +1,24 @@
+{
+  "name": "backend-interview-prep",
+  "version": "1.0.0",
+  "description": "a backend interview prep",
+  "keywords": [
+    "backend",
+    "javascript"
+  ],
+  "homepage": "https://github.com/Mehhhhull/backend-interview-prep#readme",
+  "bugs": {
+    "url": "https://github.com/Mehhhhull/backend-interview-prep/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mehhhhull/backend-interview-prep.git"
+  },
+  "license": "ISC",
+  "author": "Mehul Kumar Singh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
