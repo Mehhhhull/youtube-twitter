@@ -55,7 +55,7 @@ if (exsistedUser) {
   }
 
   //entry in db
-  User.create({
+  const user=await User.create({
     fullName,
     avatar:avatar.url,
     coverImage:coverImage?.url|| "" ,//it is not req field , so cheching for edge cases, if it was not provided by the user then
@@ -63,6 +63,18 @@ if (exsistedUser) {
     password,
     username:username.toLowerCase()
   })
+ 
+   //checking for user, also can  remove password and refresh token hehe from here only, by chaining. (only if user is found)
+  const  createdUser=await User.findById(user._id).select(
+    "-password -refreshToken"
+  )
+  if (!createdUser) {
+    throw new ApiError(500,"Something went wrong while registering the user")
+  }
+
+
+  //now to return response as user is made
+  
   
 
 
