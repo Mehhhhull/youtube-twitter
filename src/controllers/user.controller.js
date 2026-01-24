@@ -53,6 +53,16 @@ if (exsistedUser) {
   if (!avatar) {
     throw new ApiError(400,"Avatar Image Is Req.")
   }
+
+  //entry in db
+  User.create({
+    fullName,
+    avatar:avatar.url,
+    coverImage:coverImage?.url|| "" ,//it is not req field , so cheching for edge cases, if it was not provided by the user then
+    email,
+    password,
+    username:username.toLowerCase()
+  })
   
 
 
