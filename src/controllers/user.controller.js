@@ -1,5 +1,5 @@
 import asyncHandler from '../utils/asyncHandler.js';
-import {ApiError} from "../utils/ApiError.js"
+import ApiError from "../utils/ApiError.js"
 import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from '../utils/ApiResponse.js';
@@ -16,6 +16,7 @@ const registerUser=asyncHandler( async(req,res)=>{
   //return response to frontend
 
 
+
   //it is used to get data from form and json
   const {fullName,username,email,password}=req.body;
   console.log("Email",email);
@@ -30,7 +31,7 @@ const registerUser=asyncHandler( async(req,res)=>{
   }
 
 
-  const exsistedUser=User.findOne({
+  const exsistedUser=await User.findOne({
     $or:[
       { username },
       { email }
@@ -50,11 +51,11 @@ if (exsistedUser) {
   //uploading on cloudinary
   const avatar=await uploadOnCloudinary(avatarLocalPath);
   const coverImage=await uploadOnCloudinary(coverImageLocalPath);
-
+ 
   if (!avatar) {
     throw new ApiError(400,"Avatar Image Is Req.")
   }
-
+ 
   //entry in db
   const user=await User.create({
     fullName,
