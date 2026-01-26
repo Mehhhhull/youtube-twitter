@@ -111,6 +111,13 @@ const loginUser=asyncHandler(async(req,res)=>{
    if (!user) {
     throw new ApiError(404,"User not found")
    }
+
+   const isPasswordValid=await user.isPasswordCorrect(password)
+   if (!isPasswordValid) {
+    throw new ApiError(404,"Invalid user credentials")
+   }
+
+   
 })
 
 export {registerUser,loginUser}
