@@ -241,7 +241,7 @@ const refreshAccessToken=asyncHandler(async(req,res)=>{
 const changeCurrentPassword=asyncHandler(async(req,res)=>{
   const {oldPassword,newPassword}=req.body
 
-  const user=await User.findById(req.user?.id)
+  const user=await User.findById(req.user?._id)
 
   const isPasswordCorrect=await user.isPasswordCorrect(oldPassword)
   if(!isPasswordCorrect){
@@ -266,6 +266,28 @@ const getCurrentUser=asyncHandler(async(req,res)=>{
   .json(new ApiResponse(200,req.user,"Current user fetched successfully"))
 })
 
+//production tip:when there is file upload, use another controller
+const updateAccountDetails=asyncHandler(async(req,res)=>{
+  const {fullName,email}=req.body
 
+  if(!fullName || !email){
+    throw new ApiError(400,"Full Name and Email are required")
+  }
+  
+  const user=User.findByIdAndUpdate(
+    req.user?._id,
+    {
+      $set:{
+        fullName,
+        email:email
+      }
+    },
+    {new:true}
+  ).select("-password")
+
+  res
+  .status(200)
+  .json(new ApiResponse(200,user,"Account details updated successfully"))
+})
 
 export {registerUser,loginUser,logoutUser,refreshAccessToken,changeCurrentPassword,getCurrentUser}
