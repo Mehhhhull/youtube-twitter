@@ -290,4 +290,40 @@ const updateAccountDetails=asyncHandler(async(req,res)=>{
   .json(new ApiResponse(200,user,"Account details updated successfully"))
 })
 
-export {registerUser,loginUser,logoutUser,refreshAccessToken,changeCurrentPassword,getCurrentUser}
+//while file upload, first middleware will be multer(to accept files), then only loggeed in user can
+const updateUserAvatar=asyncHandler(async(req,res)=>{
+  const avatarLocalPath=res.file?.path//from multer middleware
+
+  if (!avatarLocalPath) {
+    throw new ApiError(400,"Avatar Image Is Req.")
+  }
+  //uploading on cloudinary
+  const avatar=await uploadOnCloudinary(avatarLocalPath)
+
+  if(!avatar.url){
+    throw new ApiError(400,"Error while uploading avatar")
+  }
+
+  await User.findByIdAndUpdate(
+    req.user?._id,
+
+    {
+      $set:{
+        avatar: avatar.url
+      }
+    },
+    {new:true}
+  ).select("-password")
+})
+
+
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refreshAccessToken,
+  changeCurrentPassword,
+  getCurrentUser,
+  updateAccountDetails,
+  updateUserAvatar}
