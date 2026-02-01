@@ -1,5 +1,6 @@
 const { Poll } = require("pg");
 const { connectionString } = require("pg/lib/defaults");
+require ('dotenv').config();
 
 //create a new pool instance to manage database connection
 //->postgres->://->[user]->password->@->host:port->[database name]

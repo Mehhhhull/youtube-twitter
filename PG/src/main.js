@@ -1,1 +1,3 @@
-require ('dotenv').config();
+
+
+const {createUserTable}=require('./concepts/basic-queries')
