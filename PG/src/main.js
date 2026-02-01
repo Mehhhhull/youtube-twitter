@@ -1,6 +1,6 @@
 
 
-const {insertUser,createUserTable,fetchAllUsers, updateUserInfo}=require('./concepts/basic-queries')
+const {insertUser,createUserTable,fetchAllUsers, updateUserInfo,deleteInfo}=require('./concepts/basic-queries')
 
 //test basic quaries
 async function testBasicQueries(){
@@ -18,8 +18,11 @@ try {
 // const allUsers=await fetchAllUsers();
 // console.log(allUsers);
 
-const updatedUser=await updateUserInfo('Mehul Kumar Singh','mks@gmail.com');
-console.log("Updated User:",updatedUser);
+// const updatedUser=await updateUserInfo('Mehul Kumar Singh','mks@gmail.com');
+// console.log("Updated User:",updatedUser);
+
+const deletedUser=await deleteInfo('John Sina');
+console.log("Deleted User:",deletedUser);
 
 
 } catch (e) {

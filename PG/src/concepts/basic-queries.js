@@ -76,4 +76,27 @@ async function updateUserInfo(username,newEmail){
   }
 }
 
-module.exports={createUserTable,insertUser,fetchAllUsers,updateUserInfo}
+async function deleteInfo(username){
+  const deleteQuery=`
+  DELETE FROM users
+  WHERE username=$1
+  RETURNING *
+  `
+
+  try {
+    const res=await db.query(deleteQuery,[username])
+
+    if(res.rows.length>0){
+      console.log("User deleted successfully",res.rows[0])
+      return res.rows[0]
+    }else{
+      console.log("No user found with the given username")
+      return null
+    
+    }
+  } catch (error) {
+     console.log("Error while deleting user",error)
+  }
+}
+
+module.exports={createUserTable,insertUser,fetchAllUsers,updateUserInfo,deleteInfo}
