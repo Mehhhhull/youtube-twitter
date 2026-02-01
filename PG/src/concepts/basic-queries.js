@@ -38,4 +38,17 @@ async function insertUser(username,email){
   }
 }
 
-module.exports={createUserTable,insertUser}
+async function getAllUsers(){
+    const getAllUsersFromUsersTable='SELECT * FROM users'
+
+    try {
+      const res=await db.query(getAllUsersFromUsersTable)
+      console.log("Fetched All Users")
+
+      return res.rows
+    } catch (error) {
+      console.log("Error",error)
+    }
+}
+
+module.exports={createUserTable,insertUser,getAllUsers}
