@@ -51,4 +51,29 @@ async function fetchAllUsers(){
     }
 }
 
-module.exports={createUserTable,insertUser,fetchAllUsers}
+// update->mehulkumarsingh@gmail.com to mks@gmail.com where user name is Mehul Kumar SIngh
+
+async function updateUserInfo(username,newEmail){
+  const updateQuery=`
+  UPDATE users
+  SET email=$2
+  WHERE username=$1
+  RETURNING *
+  `
+
+  try {
+    const res=await db.query(updateQuery,[username,newEmail])
+
+    if(res.rows.length>0){
+      console.log("User email updated successfully",res.rows[0])
+      return res.rows[0]
+    }else{
+      console.log("No user found with the given username")
+      return null
+    }
+  } catch (error) {
+    console.log("Error while updating user email",error)
+  }
+}
+
+module.exports={createUserTable,insertUser,fetchAllUsers,updateUserInfo}
