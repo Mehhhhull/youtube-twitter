@@ -3,7 +3,7 @@ const db=require('../db/db');
 
 async function createUserTable(){
   const createTableQuery=`
-  CREATE TABLE IF NOT EXSISTS users(
+  CREATE TABLE IF NOT EXISTS users(
   id SERIAL PRIMARY KEY,
   username VARCHAR(50) UNIQUE NOT NULL,
   email varchar(255) UNIQUE NOT NULL,

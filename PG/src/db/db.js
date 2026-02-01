@@ -1,4 +1,4 @@
-const { Poll } = require("pg");
+const { Pool } = require("pg");
 const { connectionString } = require("pg/lib/defaults");
 require ('dotenv').config();
 
