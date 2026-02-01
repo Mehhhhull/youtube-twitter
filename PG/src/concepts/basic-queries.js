@@ -22,9 +22,10 @@ async function createUserTable(){
 async function insertUser(username,email){
   const insertUserQuery=`
   INSERT INTO users(username,email)
-  VALUES($1,$2)  //using dollar sign to prevent sql injection
+  VALUES($1,$2)  
   RETURNING *
   `
+  //using dollar sign to prevent sql injection
 
   try {
     const res=await db.query(insertUserQuery,[username,email])
