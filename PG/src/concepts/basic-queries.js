@@ -38,7 +38,7 @@ async function insertUser(username,email){
   }
 }
 
-async function getAllUsers(){
+async function fetchAllUsers(){
     const getAllUsersFromUsersTable='SELECT * FROM users'
 
     try {
@@ -51,4 +51,4 @@ async function getAllUsers(){
     }
 }
 
-module.exports={createUserTable,insertUser,getAllUsers}
+module.exports={createUserTable,insertUser,fetchAllUsers}

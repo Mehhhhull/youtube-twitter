@@ -20,6 +20,8 @@ async function query(text, params) {
     console.log(
       `Executed query: , ${{ text, duration, rows: result.rowCount }}`
     );
+
+    return result;
   } catch (e) {
     console.log(e);
     throw e;
