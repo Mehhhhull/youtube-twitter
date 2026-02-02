@@ -458,6 +458,14 @@ const getWatchHistory=asyncHandler(async(req,res)=>{
                   }
                 ]
               }
+            },
+            //pipeline so that it does not send array
+            {
+              $addFields:{
+                owner:{
+                  $first:"$owner"
+                }
+              }
             }
           ]
         }
