@@ -21,13 +21,21 @@ try {
 // const updatedUser=await updateUserInfo('Mehul Kumar Singh','mks@gmail.com');
 // console.log("Updated User:",updatedUser);
 
-const deletedUser=await deleteInfo('John Sina');
-console.log("Deleted User:",deletedUser);
+// const deletedUser=await deleteInfo('John Sina');
+// console.log("Deleted User:",deletedUser);
 
 
 } catch (e) {
   console.log("Error",e)
 }  
+}
+
+async function testFilterAndSortQueries{
+  try {
+    
+  } catch (error) {
+    console.log("Error",error);
+  }
 }
 
 async function testAllQueries(){
