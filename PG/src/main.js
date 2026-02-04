@@ -1,6 +1,7 @@
 
 
-const {insertUser,createUserTable,fetchAllUsers, updateUserInfo,deleteInfo}=require('./concepts/basic-queries')
+const {insertUser,createUserTable,fetchAllUsers, updateUserInfo,deleteInfo}=require('./concepts/basic-queries');
+const { getUsersWhere } = require('./concepts/filtering-sorting');
 
 //test basic quaries
 async function testBasicQueries(){
@@ -30,9 +31,11 @@ try {
 }  
 }
 
-async function testFilterAndSortQueries{
+async function testFilterAndSortQueries() {
   try {
-    
+    //get users with a username starting with z
+    const zFilteredUsers=await getUsersWhere("username LIKE 'Z%'")
+    console.log(zFilteredUsers)
   } catch (error) {
     console.log("Error",error);
   }
