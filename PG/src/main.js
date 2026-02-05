@@ -2,7 +2,7 @@
 
 const {insertUser,createUserTable,fetchAllUsers, updateUserInfo,deleteInfo}=require('./concepts/basic-queries');
 const { getUsersWhere, getSortedUser, getPaginatedUsers } = require('./concepts/filtering-sorting');
-const { createPostsTable } = require('./concepts/relationships');
+const { createPostsTable, insertNewPost } = require('./concepts/relationships');
 
 //test basic quaries
 // async function testBasicQueries(){
@@ -34,10 +34,12 @@ const { createPostsTable } = require('./concepts/relationships');
 
 async function testRelationshipQueries(){
   try {
-    await createPostsTable()
+    // await createPostsTable()
+
+    await insertNewPost('First Post','This is my first post',6)
 
   } catch (e) {
-    console.error("Error",error);
+    console.error("Error",e);
   }
 }
 
