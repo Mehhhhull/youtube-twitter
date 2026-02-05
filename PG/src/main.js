@@ -1,7 +1,7 @@
 
 
 const {insertUser,createUserTable,fetchAllUsers, updateUserInfo,deleteInfo}=require('./concepts/basic-queries');
-const { getUsersWhere } = require('./concepts/filtering-sorting');
+const { getUsersWhere, getSortedUser, getPaginatedUsers } = require('./concepts/filtering-sorting');
 
 //test basic quaries
 async function testBasicQueries(){
@@ -9,7 +9,7 @@ try {
   // await createUserTable()
 
   //Insert new Users
-  // await insertUser('Mehul Kumar Singh','mehulkumarsingh@gmail.com')
+  await insertUser('Zxy','zkyngh@gmail.com')
   // await insertUser('John Sina','johnsina@gmail.com')
   // await insertUser('Jane Smith','janesmith@gmail.com')
   // await insertUser('Bob Johnson','bobjohnson@gmail.com')
@@ -34,15 +34,24 @@ try {
 async function testFilterAndSortQueries() {
   try {
     //get users with a username starting with z
-    const zFilteredUsers=await getUsersWhere("username LIKE 'Z%'")
-    console.log(zFilteredUsers)
+    // const zFilteredUsers=await getUsersWhere("username LIKE 'Z%'")
+    // console.log(zFilteredUsers)
+
+    // const sortedUsers=await getSortedUser('created_at','DESC')
+    // console.log(sortedUsers);
+
+    const paginatedUsers=await getPaginatedUsers(2,0)
+    console.log(paginatedUsers);
   } catch (error) {
     console.log("Error",error);
   }
 }
 
+
+
 async function testAllQueries(){
   await testBasicQueries()
+  await testFilterAndSortQueries()
 }
 
 testAllQueries()
