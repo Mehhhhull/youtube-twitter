@@ -17,8 +17,17 @@ datasource db {
 //this file will be used for any model that you want to create in this project
 //npx prisma migrate dev --name init to sync ur schema and database
 
+
+
 model Book{
   id Int @id @default(autoincrement())
   title String
   publishedDate DateTime
+  author Author @relation(fields:[authorId],reference:[id])
+  authorId Int
+}
+
+model Author {
+  id Int @id @default(autoincrement())
+  name Stringbooks Book[]
 }
