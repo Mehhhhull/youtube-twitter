@@ -23,11 +23,12 @@ model Book{
   id Int @id @default(autoincrement())
   title String
   publishedDate DateTime
-  author Author @relation(fields:[authorId],reference:[id])
+  author Author @relation(fields:[authorId],references:[id])
   authorId Int
 }
 
 model Author {
   id Int @id @default(autoincrement())
-  name Stringbooks Book[]
+  name String
+  books Book[]
 }
