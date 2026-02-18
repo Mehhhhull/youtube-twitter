@@ -23,7 +23,7 @@ model Book{
   id Int @id @default(autoincrement())
   title String
   publishedDate DateTime
-  author Author @relation(fields:[authorId],references:[id])
+  author Author @relation(fields:[authorId],references:[id],onDelete:Cascade)
   authorId Int
 }
 
